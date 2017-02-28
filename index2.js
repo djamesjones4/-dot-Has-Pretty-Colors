@@ -1,15 +1,15 @@
 $(document).ready(function() {
 console.log();
 // event listener for button
-$('.btn').click(function() {
+$('#search-color').click(function() {
   console.log('you clicked');
   //user input value
-let userSearch = $('#search-text').val().slice(1);
+let userSearch = $('#color-selector').val().slice(1);
 console.log(userSearch);
 $.ajax({
 method: 'GET',
 
-url: `http://www.colourlovers.com/api/palettes/${userSearch}/?format=json`
+url: `http://www.colourlovers.com/api/palettes/OR/${userSearch}/?format=json`
 ,
 
 dataType: 'jsonp',
