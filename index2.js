@@ -2,20 +2,24 @@ $(document).ready(function() {
 // event listener for button
 $('#search-color-selector-btn').click(function() {
   console.log('you clicked');
-  //user input value
+  //user input value minus '#'
 let userSearch = $('#color-selector').val().slice(1);
-console.log(userSearch);
-
+console.log('user input', userSearch);
+//set up variable to contain data
+let selectColorData= []
 $.ajax({
-      url: 'http://www.colourlovers.com/api/palettes/random',
+      url: `http://www.colourlovers.com/api/palettes/${userSearch}`,
       dataType:'jsonp',
       data: {
-          format: 'json'
-      },
+            format: 'json',
+            numResults: 50,
+            orderCol: 'score',
+            hex: userSearch
+        },
       jsonp: 'jsonCallback',
       success: function(data){
         console.log(data);
-        
+
       }
   });
 
