@@ -1,9 +1,23 @@
 $(document).ready(function() {
     //append div function
     function createPaletteDiv(data) {
-        let paletteDiv = $('<div>').addClass("palette-div")
-        paletteDiv.appendTo('#color-selector-box')
 
+        for (i = 0; i < data.colors.length; i++) {
+          let paletteDiv = $('<div>').addClass("palette-div")
+          paletteDiv.appendTo('#color-selector-box')
+            // create div with background color for hex value data.colors[i]
+            let hexValue = data.colors[i]
+            console.log(hexValue)
+            paletteDiv.addClass(`${hexValue}`)
+            paletteDiv.css('background-color', '#'+ hexValue);
+            paletteDiv.css('width', '50px');
+            paletteDiv.css('height', '50px');
+            paletteDiv.css('display', 'inline-block')
+            console.log(paletteDiv);
+
+            // let colorDiv = $('<div>').addClass('color-div'[i]).appendTo(paletteDiv)
+
+        }
     }
 
     // event listener for button
@@ -28,6 +42,7 @@ $(document).ready(function() {
                 //append container for each palette
                 for (var i = 0; i < data.length; i++) {
                     createPaletteDiv(data[i])
+                    break
                 }
 
                 // console.log("div children:", $('#color-selector-box').children());
