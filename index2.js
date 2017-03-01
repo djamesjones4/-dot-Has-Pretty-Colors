@@ -1,18 +1,22 @@
 $(document).ready(function() {
     //append div function
-    function createPaletteDiv(data) {
 
+    function createPaletteDiv(data) {
+        let paletteDiv = $('<div>').addClass("palette-div")
+        paletteDiv.css('width', '250px')
+        paletteDiv.css('height', '50px')
+        paletteDiv.appendTo('#color-selector-box')
         for (i = 0; i < data.colors.length; i++) {
-          let paletteDiv = $('<div>').addClass("palette-div")
-          paletteDiv.appendTo('#color-selector-box')
+
+            let colorDiv = $('<div>').addClass('color-div' [i]).appendTo(paletteDiv)
             // create div with background color for hex value data.colors[i]
             let hexValue = data.colors[i]
             console.log(hexValue)
-            paletteDiv.addClass(`${hexValue}`)
-            paletteDiv.css('background-color', '#'+ hexValue);
-            paletteDiv.css('width', '50px');
-            paletteDiv.css('height', '50px');
-            paletteDiv.css('display', 'inline-block')
+            colorDiv.addClass(`${hexValue}`)
+            colorDiv.css('background-color', '#' + hexValue);
+            colorDiv.css('width', '50px');
+            colorDiv.css('height', '50px');
+            colorDiv.css('display', 'inline-block')
             console.log(paletteDiv);
 
             // let colorDiv = $('<div>').addClass('color-div'[i]).appendTo(paletteDiv)
