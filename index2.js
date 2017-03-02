@@ -5,6 +5,7 @@ $(document).ready(function() {
         let paletteDiv = $('<div>').addClass("palette-div")
         paletteDiv.css('width', '250px')
         paletteDiv.css('height', '50px')
+        paletteDiv.css('margin', '10px')
         paletteDiv.appendTo('#color-selector-box')
         for (i = 0; i < data.colors.length; i++) {
 
@@ -23,7 +24,7 @@ $(document).ready(function() {
 
         }
     }
-
+var selectColorData = [];
     // event listener for button
     $('#search-color-selector-btn').click(function() {
         console.log('you clicked');
@@ -31,7 +32,6 @@ $(document).ready(function() {
         let userSearch = $('#color-selector').val().slice(1);
         console.log('user input', userSearch);
         //set up variable to contain data
-        let selectColorData = [];
         $.ajax({
             url: `http://www.colourlovers.com/api/palettes`,
             dataType: 'jsonp',
@@ -45,8 +45,8 @@ $(document).ready(function() {
                 console.log(data[0]);
                 //append container for each palette
                 for (var i = 0; i < data.length; i++) {
+
                     createPaletteDiv(data[i])
-                    break
                 }
 
                 // console.log("div children:", $('#color-selector-box').children());
