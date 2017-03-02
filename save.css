@@ -17,6 +17,16 @@
   background-clip: text;
 }
 
+.text-color {
+
+  color:white;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/*#sidebar {
+  background-color: #345672;
+}*/
 .rainbow{
   background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #26f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
   background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
@@ -29,6 +39,16 @@
   margin-left: 0px;
 }
 .palettecontainer {
+width: 300px;
+height: 50px;
+
+}
+.palettecontainer2 {
+width: 300px;
+height: 50px;
+
+}
+.palettecontainer3 {
 width: 300px;
 height: 50px;
 
@@ -55,4 +75,20 @@ height: 50px;
 }
 .color-5 {
   background-color: #26ade4
+}
+
+.color-6 {
+  background-color: #1C1E1F
+}
+.color-7 {
+  background-color: #990909
+}
+.color-8 {
+  background-color: #ff8000
+}
+.color-9 {
+  background-color: #f7d954
+}
+.color-10 {
+  background-color: #1d7f8c
 }
