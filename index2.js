@@ -1,30 +1,32 @@
 $(document).ready(function() {
     //append div function
 
-    function createPaletteDiv(data) {
+    var paletteContainer = function createPaletteDiv(data) {
         let paletteDiv = $('<div>').addClass("palette-div")
         paletteDiv.css('width', '250px')
         paletteDiv.css('height', '50px')
         paletteDiv.css('margin', '10px')
+        paletteDiv.attr('draggable', true)
         paletteDiv.appendTo('#color-selector-box')
-        for (i = 0; i < data.colors.length; i++) {
+        if (data !== undefined) {
+            for (i = 0; i < data.colors.length; i++) {
 
-            let colorDiv = $('<div>').addClass('color-div' [i]).appendTo(paletteDiv)
-            // create div with background color for hex value data.colors[i]
-            let hexValue = data.colors[i]
-            console.log(hexValue)
-            colorDiv.addClass(`${hexValue}`)
-            colorDiv.css('background-color', '#' + hexValue);
-            colorDiv.css('width', '50px');
-            colorDiv.css('height', '50px');
-            colorDiv.css('display', 'inline-block')
-            console.log(paletteDiv);
+                let colorDiv = $('<div>').addClass('color-div' [i]).appendTo(paletteDiv)
+                // create div with background color for hex value data.colors[i]
+                let hexValue = data.colors[i]
+                // console.log(hexValue)
+                colorDiv.addClass(`${hexValue}`)
+                colorDiv.css('background-color', '#' + hexValue);
+                colorDiv.css('width', '50px');
+                colorDiv.css('height', '50px');
+                colorDiv.css('display', 'inline-block')
+                // console.log(paletteDiv);
 
-            // let colorDiv = $('<div>').addClass('color-div'[i]).appendTo(paletteDiv)
-
+                // let colorDiv = $('<div>').addClass('color-div'[i]).appendTo(paletteDiv)
+            }
         }
     }
-var selectColorData = [];
+    var selectColorData = [];
     // event listener for button
     $('#search-color-selector-btn').click(function() {
         console.log('you clicked');
@@ -37,7 +39,7 @@ var selectColorData = [];
             dataType: 'jsonp',
             data: {
                 format: 'json',
-                numResults: 50,
+                numResults: 4,
                 hex: userSearch,
             },
             jsonp: 'jsonCallback',
@@ -46,7 +48,7 @@ var selectColorData = [];
                 //append container for each palette
                 for (var i = 0; i < data.length; i++) {
 
-                    createPaletteDiv(data[i])
+                    paletteContainer(data[i])
                 }
 
                 // console.log("div children:", $('#color-selector-box').children());
