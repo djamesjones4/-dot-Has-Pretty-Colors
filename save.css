@@ -16,10 +16,43 @@
   -webkit-background-clip: text;
   background-clip: text;
 }
+
 .rainbow{
   background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #26f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
   background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
   color:transparent;
   -webkit-background-clip: text;
   background-clip: text;
+}
+.btn {
+  margin: 10px;
+  margin-left: 0px;
+}
+.palettecontainer {
+width: 300px;
+height: 50px;
+
+}
+.color-div {
+  width: 50px;
+  height: 50px;
+  margin: 0px;
+  padding: 0;
+  display: inline-block;
+
+}
+.color-1 {
+  background-color: #d1e751
+}
+.color-2 {
+  background-color: #ffffff
+}
+.color-3 {
+  background-color: #000000
+}
+.color-4 {
+  background-color: #4dbce9
+}
+.color-5 {
+  background-color: #26ade4
 }
