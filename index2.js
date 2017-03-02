@@ -1,11 +1,12 @@
 $(document).ready(function() {
     //append div function
-
+    // make dropzone dropable
+    $('#palette-dropzone').attr('ondrop', 'drop(event)');
+    $('#palette-dropzone').attr('ondragover', 'allowDrop(event)')
     var selectColorData = []; // incase I need to push paletteDiv to global variable
     var createPalContainer = function createPaletteDiv(data, palCount, divContainer) {
-        // let divContainer = $('<div>').addClass('palette-container')
-        // divContainer.appendTo('#color-selector-box')
-        let paletteDiv = $('<div>').addClass("palette-div").attr('id',`pal${palCount}`)
+
+        let paletteDiv = $('<div>').addClass("palette-div").attr('id', `pal${palCount}`)
         paletteDiv.css('width', '250px')
         paletteDiv.css('height', '50px')
         paletteDiv.css('margin', '10px')
@@ -60,21 +61,20 @@ $(document).ready(function() {
 
                 // console.log("div children:", $('#color-selector-box').children());
                 // drag/drop event script
-                function allowDrop(ev) {
-                    ev.preventDefault();
-                }
-
-                function drag(ev) {
-                    ev.dataTransfer.setData("text", ev.target.id);
-                }
-
-                function drop(ev) {
-                    ev.preventDefault();
-                    var data = ev.dataTransfer.getData("text");
-                    ev.target.appendChild(document.getElementById(data));
-                }
-
-
+                // function allowDrop(ev) {
+                //     ev.preventDefault();
+                // }
+                //
+                // function drag(ev) {
+                //     ev.dataTransfer.setData("text", ev.target.id);
+                //     console.log('drag');
+                // }
+                //
+                // function drop(ev) {
+                //     ev.preventDefault();
+                //     var data = ev.dataTransfer.getData("text");
+                //     ev.target.appendChild(document.getElementById(data));
+                // }
             } //success block close
 
         });
@@ -84,14 +84,14 @@ $(document).ready(function() {
 
 
     //event listener for search by color name
-    $('#search-color-btn').click(function() {
-        let userSearchTwo = $('#search-color-text').val()
-        console.log('user search 2:', userSearchTwo);
-
-
-
-        //event listener2 (#search-color-btn) close
-    })
+    // $('#search-color-btn').click(function() {
+    //     let userSearchTwo = $('#search-color-text').val()
+    //     console.log('user search 2:', userSearchTwo);
+    //
+    //
+    //
+    //     //event listener2 (#search-color-btn) close
+    // })
 
 
 
