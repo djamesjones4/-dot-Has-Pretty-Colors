@@ -4,8 +4,8 @@ $(document).ready(function() {
     $('#palette-dropzone').attr('ondrop', 'drop(event)');
     $('#palette-dropzone').attr('ondragover', 'allowDrop(event)')
     var selectColorData = []; // incase I need to push paletteDiv to global variable
-    var createPalContainer = function createPaletteDiv(data, palCount, divContainer) {
 
+    var createPalContainer = function createPaletteDiv(data, palCount, divContainer) {
         let paletteDiv = $('<div>').addClass("palette-div").attr('id', `pal${palCount}`)
         paletteDiv.css('width', '250px')
         paletteDiv.css('height', '50px')
