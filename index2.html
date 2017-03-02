@@ -63,7 +63,7 @@
         <div class="row">
             <div id="color-selector-box" class="col-md-4">
                 <h2 class="text-color-foot">Select Colors</h2>
-                <p class="text-color-foot">Click the box below to select a color to base your palette on.</p>
+                <p class="rainbow">Click the box below to select a color to base your palette on.</p>
                 <form>
                     <input id="color-selector" type="color" autocomplete="on">
                     </input>
@@ -72,14 +72,14 @@
             <div class="col-md-4">
                 <h2 class="text-color-foot">Search Colors</h2>
 
-                <input type="text" id="search-color-text" placeholder="color name" >
+                <input type="text" id="search-color-text" placeholder="color name">
                 <p><a id="search-color-btn" class="btn btn-default" href="#" role="button">Search &raquo;</a></p>
             </div>
             <div class="col-md-4 text-color-foot">
                 <h2>Save Palettes</h2>
-                <p class="rainbow">Drag palettes you like from the search field and drop them here to use later.
+                <p class="rainbow">Drag palettes you like from the search field and drop them here. Click save palettes to use them later.
                 </p>
-                <div id='palette-dropzone'>
+                <div id='palette-dropzone' ondrop="drop(event)" ondragover="allowDrop(event)">
                 </div>
                 <p><a class="btn btn-default" href="#" role="button">Save Palettes &raquo;</a></p>
             </div>

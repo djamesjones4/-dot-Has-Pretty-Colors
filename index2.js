@@ -1,32 +1,35 @@
 $(document).ready(function() {
     //append div function
 
-    var paletteContainer = function createPaletteDiv(data) {
-        let paletteDiv = $('<div>').addClass("palette-div")
+    var selectColorData = []; // incase I need to push paletteDiv to global variable
+    var createPalContainer = function createPaletteDiv(data, palCount, divContainer) {
+        // let divContainer = $('<div>').addClass('palette-container')
+        // divContainer.appendTo('#color-selector-box')
+        let paletteDiv = $('<div>').addClass("palette-div").attr('id',`pal${palCount}`)
         paletteDiv.css('width', '250px')
         paletteDiv.css('height', '50px')
         paletteDiv.css('margin', '10px')
         paletteDiv.attr('draggable', true)
-        paletteDiv.appendTo('#color-selector-box')
+        paletteDiv.attr('ondragstart', "drag(event)")
+        paletteDiv.appendTo(divContainer)
         if (data !== undefined) {
             for (i = 0; i < data.colors.length; i++) {
 
                 let colorDiv = $('<div>').addClass('color-div' [i]).appendTo(paletteDiv)
-                // create div with background color for hex value data.colors[i]
                 let hexValue = data.colors[i]
                 // console.log(hexValue)
-                colorDiv.addClass(`${hexValue}`)
+                // give each colorDiv a unique classname (index[c,o,l,o,r] + palette title + hexValue)
+                colorDiv.addClass(`${data.title} ` + `${hexValue}`)
+                // add background color of hexValue to colorDiv
                 colorDiv.css('background-color', '#' + hexValue);
                 colorDiv.css('width', '50px');
                 colorDiv.css('height', '50px');
                 colorDiv.css('display', 'inline-block')
                 // console.log(paletteDiv);
-
-                // let colorDiv = $('<div>').addClass('color-div'[i]).appendTo(paletteDiv)
             }
         }
     }
-    var selectColorData = [];
+
     // event listener for button
     $('#search-color-selector-btn').click(function() {
         console.log('you clicked');
@@ -44,16 +47,32 @@ $(document).ready(function() {
             },
             jsonp: 'jsonCallback',
             success: function(data) {
-                console.log(data[0]);
+                console.log("first object in data set", data[0]);
+                //create divContainer
+                var divContainer = $('<div>').addClass('palette-container')
+                divContainer.appendTo('#color-selector-box')
                 //append container for each palette
                 for (var i = 0; i < data.length; i++) {
 
-                    paletteContainer(data[i])
+                    createPalContainer(data[i], i, divContainer)
+
                 }
 
                 // console.log("div children:", $('#color-selector-box').children());
+                // drag/drop event script
+                function allowDrop(ev) {
+                    ev.preventDefault();
+                }
 
+                function drag(ev) {
+                    ev.dataTransfer.setData("text", ev.target.id);
+                }
 
+                function drop(ev) {
+                    ev.preventDefault();
+                    var data = ev.dataTransfer.getData("text");
+                    ev.target.appendChild(document.getElementById(data));
+                }
 
 
             } //success block close
