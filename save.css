@@ -19,7 +19,7 @@
 
 .text-color {
 
-  color:white;
+  color: white;
   -webkit-background-clip: text;
   background-clip: text;
 }
