@@ -1,15 +1,5 @@
 $(document).ready(function() {
-    //append div function
-
-    // make dropzone dropable
-    // $('#palette-dropzone').attr('ondrop', 'drop(event)');
-    // $('#palette-dropzone').attr('ondragover', 'allowDrop(event)')
-    var selectColorData = []; // incase I need to push paletteDiv to global variable
-    // Local storage
-// let palletes = [];
-//
-// palettes.push()
-function drag(event){}
+    // function to dynamically display palettes from API data
     var createPalContainer = function createPaletteDiv(data, palCount, divContainer) {
         let paletteDiv = $('<div>').addClass("palette-div").attr('id', `pal${palCount}`)
         paletteDiv.css('width', '250px')
@@ -23,7 +13,6 @@ function drag(event){}
 
                 let colorDiv = $('<div>').addClass('color-div' [i]).appendTo(paletteDiv)
                 let hexValue = data.colors[i]
-                // console.log(hexValue)
                 // give each colorDiv a unique classname (index[c,o,l,o,r] + palette title + hexValue)
                 colorDiv.addClass(`${data.title} ` + `${hexValue}`)
                 // add background color of hexValue to colorDiv
@@ -36,9 +25,26 @@ function drag(event){}
         }
     } // end create palette function
 
+    // create array of arrays to save to local storage on save palettes click event
+    let savedPalettes = [];
+    $('#save-palettes').click(function() {
+        $('#palette-dropzone').children().each(function() {
+            let palette = []
+            $(this).children().each(function() {
+                let rgbColor = this.style.backgroundColor
+                palette.push(rgbColor)
+            })
+            savedPalettes.push(palette)
+        })
+        console.log('saved Palettes', savedPalettes);
+        console.log(typeof savedPalettes);
+        localStorage.setItem("palettes", JSON.stringify(savedPalettes))
+        let storagePal= JSON.parse(localStorage.getItem("palettes"))
+        console.log('Palettes out of storage', storagePal);
+    })
 
 
-    // event listener for button
+    // event listener for search selection button
     $('#search-color-selector-btn').click(function() {
         console.log('you clicked');
         //user input value minus '#'
@@ -67,61 +73,58 @@ function drag(event){}
                 }
 
                 // drag and drop funtions start
-
                 var dragged;
+                /* events fired on the draggable target */
+                document.addEventListener("drag", function(event) {}, false);
 
-                  /* events fired on the draggable target */
-                  document.addEventListener("drag", function( event ) {
+                document.addEventListener("dragstart", function(event) {
+                    // store a ref. on the dragged elem
+                    dragged = event.target;
+                    // make it half transparent
+                    event.target.style.opacity = .5;
+                }, false);
 
-                  }, false);
+                document.addEventListener("dragend", function(event) {
+                    // reset the transparency
+                    event.target.style.opacity = "";
+                }, false);
+                /* events fired on the drop targets */
+                document.addEventListener("dragover", function(event) {
+                    // prevent default to allow drop
+                    event.preventDefault();
+                }, false);
 
-                  document.addEventListener("dragstart", function( event ) {
-                      // store a ref. on the dragged elem
-                      dragged = event.target;
-                      // make it half transparent
-                      event.target.style.opacity = .5;
-                  }, false);
+                document.addEventListener("dragenter", function(event) {
+                    // highlight potential drop target when the draggable element enters it
+                    if (event.target.className == "dropzone") {
+                        $(this).addClass('z-depth-5')
+                        // event.target.style.background = "purple";
+                    }
 
-                  document.addEventListener("dragend", function( event ) {
-                      // reset the transparency
-                      event.target.style.opacity = "";
-                  }, false);
+                }, false);
 
-                  /* events fired on the drop targets */
-                  document.addEventListener("dragover", function( event ) {
-                      // prevent default to allow drop
-                      event.preventDefault();
-                  }, false);
+                document.addEventListener("dragleave", function(event) {
+                    // reset background of potential drop target when the draggable element leaves it
+                    if (event.target.className == "dropzone") {
+                        $(this).removeClass('z-depth-5')
+                        // event.target.style.background = "";
+                    }
 
-                  document.addEventListener("dragenter", function( event ) {
-                      // highlight potential drop target when the draggable element enters it
-                      if ( event.target.className == "dropzone" ) {
-                          event.target.style.background = "purple";
-                      }
+                }, false);
 
-                  }, false);
+                document.addEventListener("drop", function(event) {
+                    // prevent default action (open as link for some elements)
+                    event.preventDefault();
+                    // move dragged elem to the selected drop target
+                    if (event.target.className == "dropzone") {
+                        event.target.style.background = "";
+                        // dragged.parentNode.removeChild( dragged );
+                        event.target.appendChild(dragged);
+                    }
 
-                  document.addEventListener("dragleave", function( event ) {
-                      // reset background of potential drop target when the draggable element leaves it
-                      if ( event.target.className == "dropzone" ) {
-                          event.target.style.background = "";
-                      }
+                }, false);
 
-                  }, false);
-
-                  document.addEventListener("drop", function( event ) {
-                      // prevent default action (open as link for some elements)
-                      event.preventDefault();
-                      // move dragged elem to the selected drop target
-                      if ( event.target.className == "dropzone" ) {
-                          event.target.style.background = "";
-                          // dragged.parentNode.removeChild( dragged );
-                          event.target.appendChild( dragged );
-                      }
-
-                  }, false);
-
-                  // end drag and drop funciton
+                // end drag and drop funciton
 
             } //success block close
 
