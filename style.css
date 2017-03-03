@@ -27,6 +27,9 @@
   -webkit-background-clip: text;
   background-clip: text;
 }
+.sidebar-nav-fixed {
+  width: 22%;
+}
 #palette-dropzone{
   width: 300px;
   height: 300px;

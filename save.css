@@ -24,8 +24,13 @@
   background-clip: text;
 }
 
+.sidebar-nav-fixed {
+  width: 14%;
+}
 /*#sidebar {
-  background-color: #345672;
+position: fixed;
+
+display: ;
 }*/
 .rainbow{
   background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #26f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
