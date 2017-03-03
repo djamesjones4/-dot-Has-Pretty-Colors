@@ -31,7 +31,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-                <a class="navbar-brand brand-font rainbow" href="home.html">(dot) H a s  P r e t t y  C o l o r s</a>
+                <h3><a class="masthead-brand brand-font rainbow" href="home.html">(dot) H a s  P r e t t y  C o l o r s</a></h3>
             </div>
             <div id="navbar" class="collapse navbar-collapse navbar-right">
                 <ul class="nav navbar-nav">
@@ -45,12 +45,12 @@
         <!-- /.container -->
     </nav>
     <!-- /.navbar -->
-    <div class="col-xs-12 col-sm-9"> 
-      <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="col-xs-6 col-sm-9 col-lg-8">
+        <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">
-            <div class="container">
+            <div class="container" id="jumbocontainer">
                 <h1>Let's get started!</h1>
-                <p>Below you can select, search, colors to get a list of complementary color palettes. You can save these palettes and see how they might look on a web page by viewing them in your saved palettes page.</p>
+                <p>Below you can select and search colors to get a list of complementary color palettes. You can save these palettes and see how they might look on a web page by viewing them in your saved palettes page.</p>
                 <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
             </div>
         </div>
@@ -58,9 +58,9 @@
         <div class="container">
             <!-- Example row of columns -->
             <div class="row">
-                <div id="color-selector-box" class="col-md-4">
+                <div id="color-selector-box" class="">
                     <h2 class="text-color-foot">Select Colors</h2>
-                    <p class="rainbow">Click the box below to select a color to base your palette on.</p>
+                    <p class="text-color-foot">Click the box below to select a color to base your palette on.</p>
                     <form>
                         <input id="color-selector" type="color" autocomplete="on">
                         </input>
@@ -68,20 +68,12 @@
                         <div id="paletteCont">
                         </div>
                 </div>
-                <div class="col-md-4">
+                <!-- <div class="col-md-4">
                     <h2 class="text-color-foot">Search Colors</h2>
 
                     <input type="text" id="search-color-text" placeholder="color name">
                     <p><a id="search-color-btn" class="btn btn-default" href="#" role="button">Search &raquo;</a></p>
-                </div>
-                <div class="col-md-4 text-color-foot">
-                    <h2>Save Palettes</h2>
-                    <p class="rainbow">Drag palettes you like from the search field and drop them here. Click save palettes to use them later.
-                    </p>
-                    <div id='palette-dropzone' class="dropzone">
-                    </div>
-                    <p><a class="btn btn-default" href="#" role="button" id="save-palettes">Save Palettes &raquo;</a></p>
-                </div>
+                </div> -->
             </div>
 
             <hr>
@@ -92,18 +84,19 @@
         </div>
         <!-- /container -->
     </div>
-    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+    <div class="col-xs-6 col-sm-3 col-lg-4 sidebar" id="sidebar">
         <div class="list-group sidebar-nav-fixed pull-right affix">
-            <a href="#" class="list-group-item active">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
+            <div class="text-color-foot">
+                <h2>Save Palettes</h2>
+                <div class="sidebar-paragraph">
+                    <p class="text-color-foot">Drag palettes you like from the search field and drop them here. Click save palettes to use them later.
+                    </p>
+                </div>
+                <div id='palette-dropzone' class="dropzone">
+                </div>
+                <p><a class="btn btn-default" href="#" role="button" id="save-palettes">Save Palettes &raquo;</a></p>
+            </div>
+
         </div>
     </div>
 

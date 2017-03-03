@@ -75,7 +75,7 @@ $(document).ready(function() {
             dataType: 'jsonp',
             data: {
                 format: 'json',
-                numResults: 4,
+                numResults: 20,
                 hex: userSearch,
             },
             jsonp: 'jsonCallback',
@@ -84,7 +84,7 @@ $(document).ready(function() {
                 $('#paletteCont').empty()
                 // create container for API data to populate with palettes
                 var divContainer = $('#paletteCont')
-                divContainer.addClass('palette-container')
+                // divContainer.addClass('palette-container')
 
                 // Create and append container for each palette
                 for (var i = 0; i < data.length; i++) {
