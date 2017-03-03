@@ -26,8 +26,8 @@ $(document).ready(function() {
     } // end create palette function
 
     // create array of arrays to save to local storage on save palettes click event
-    let savedPalettes = [];
     $('#save-palettes').click(function() {
+        let savedPalettes = [];
         $('#palette-dropzone').children().each(function() {
             let palette = []
             $(this).children().each(function() {
@@ -36,21 +36,20 @@ $(document).ready(function() {
             })
             savedPalettes.push(palette)
         })
-        console.log('saved Palettes', savedPalettes);
-        console.log(typeof savedPalettes);
+        console.log('savedPalettes for storage:', savedPalettes);
+        console.log("type of savedPalettes:", typeof savedPalettes);
         localStorage.setItem("palettes", JSON.stringify(savedPalettes))
-        let storagePal= JSON.parse(localStorage.getItem("palettes"))
+        let storagePal = JSON.parse(localStorage.getItem("palettes"))
         console.log('Palettes out of storage', storagePal);
     })
 
 
     // event listener for search selection button
     $('#search-color-selector-btn').click(function() {
-        console.log('you clicked');
-        //user input value minus '#'
+        //set up variable for user input
+        //user input value minus '#'. Input is a hex value from color picker
         let userSearch = $('#color-selector').val().slice(1);
-        console.log('user input', userSearch);
-        //set up variable to contain data
+        console.log('userSearch:', userSearch);
         $.ajax({
             url: `http://www.colourlovers.com/api/palettes`,
             dataType: 'jsonp',
@@ -62,17 +61,15 @@ $(document).ready(function() {
             jsonp: 'jsonCallback',
             success: function(data) {
                 console.log("first object in data set", data[0]);
-                //create divContainer
+                // create container for API data to populate with palettes
                 var divContainer = $('<div>').addClass('palette-container')
                 divContainer.appendTo('#color-selector-box')
-                divContainer.addClass('dropzone')
-                //append container for each palette
+                // Create and append container for each palette
                 for (var i = 0; i < data.length; i++) {
                     createPalContainer(data[i], i, divContainer)
-
                 }
 
-                // drag and drop funtions start
+                // drag and drop funtions starts below. Must be inside ajax call for synchronicity.
                 var dragged;
                 /* events fired on the draggable target */
                 document.addEventListener("drag", function(event) {}, false);
@@ -128,21 +125,13 @@ $(document).ready(function() {
 
             } //success block close
 
-        });
+        }); // ajax close
 
 
-    }) // event listener close
+    }) // search event listener close
 
 
-    //event listener for search by color name
-    // $('#search-color-btn').click(function() {
-    //     let userSearchTwo = $('#search-color-text').val()
-    //     console.log('user search 2:', userSearchTwo);
-    //
-    //
-    //
-    //     //event listener2 (#search-color-btn) close
-    // })
+
 
 
 
