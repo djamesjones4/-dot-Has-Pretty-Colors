@@ -1,17 +1,22 @@
 $(document).ready(function() {
     //append div function
-    // make dropzone dropable
-    $('#palette-dropzone').attr('ondrop', 'drop(event)');
-    $('#palette-dropzone').attr('ondragover', 'allowDrop(event)')
-    var selectColorData = []; // incase I need to push paletteDiv to global variable
 
+    // make dropzone dropable
+    // $('#palette-dropzone').attr('ondrop', 'drop(event)');
+    // $('#palette-dropzone').attr('ondragover', 'allowDrop(event)')
+    var selectColorData = []; // incase I need to push paletteDiv to global variable
+    // Local storage
+// let palletes = [];
+//
+// palettes.push()
+function drag(event){}
     var createPalContainer = function createPaletteDiv(data, palCount, divContainer) {
         let paletteDiv = $('<div>').addClass("palette-div").attr('id', `pal${palCount}`)
         paletteDiv.css('width', '250px')
         paletteDiv.css('height', '50px')
         paletteDiv.css('margin', '10px')
         paletteDiv.attr('draggable', true)
-        paletteDiv.attr('ondragstart', "drag(event)")
+        paletteDiv.attr('ondragstart', "event.dataTransfer.setData('text/plain',null)")
         paletteDiv.appendTo(divContainer)
         if (data !== undefined) {
             for (i = 0; i < data.colors.length; i++) {
@@ -29,7 +34,9 @@ $(document).ready(function() {
                 // console.log(paletteDiv);
             }
         }
-    }
+    } // end create palette function
+
+
 
     // event listener for button
     $('#search-color-selector-btn').click(function() {
@@ -52,29 +59,70 @@ $(document).ready(function() {
                 //create divContainer
                 var divContainer = $('<div>').addClass('palette-container')
                 divContainer.appendTo('#color-selector-box')
+                divContainer.addClass('dropzone')
                 //append container for each palette
                 for (var i = 0; i < data.length; i++) {
-
                     createPalContainer(data[i], i, divContainer)
 
                 }
 
-                // console.log("div children:", $('#color-selector-box').children());
-                // drag/drop event script
-                // function allowDrop(ev) {
-                //     ev.preventDefault();
-                // }
-                //
-                // function drag(ev) {
-                //     ev.dataTransfer.setData("text", ev.target.id);
-                //     console.log('drag');
-                // }
-                //
-                // function drop(ev) {
-                //     ev.preventDefault();
-                //     var data = ev.dataTransfer.getData("text");
-                //     ev.target.appendChild(document.getElementById(data));
-                // }
+                // drag and drop funtions start
+
+                var dragged;
+
+                  /* events fired on the draggable target */
+                  document.addEventListener("drag", function( event ) {
+
+                  }, false);
+
+                  document.addEventListener("dragstart", function( event ) {
+                      // store a ref. on the dragged elem
+                      dragged = event.target;
+                      // make it half transparent
+                      event.target.style.opacity = .5;
+                  }, false);
+
+                  document.addEventListener("dragend", function( event ) {
+                      // reset the transparency
+                      event.target.style.opacity = "";
+                  }, false);
+
+                  /* events fired on the drop targets */
+                  document.addEventListener("dragover", function( event ) {
+                      // prevent default to allow drop
+                      event.preventDefault();
+                  }, false);
+
+                  document.addEventListener("dragenter", function( event ) {
+                      // highlight potential drop target when the draggable element enters it
+                      if ( event.target.className == "dropzone" ) {
+                          event.target.style.background = "purple";
+                      }
+
+                  }, false);
+
+                  document.addEventListener("dragleave", function( event ) {
+                      // reset background of potential drop target when the draggable element leaves it
+                      if ( event.target.className == "dropzone" ) {
+                          event.target.style.background = "";
+                      }
+
+                  }, false);
+
+                  document.addEventListener("drop", function( event ) {
+                      // prevent default action (open as link for some elements)
+                      event.preventDefault();
+                      // move dragged elem to the selected drop target
+                      if ( event.target.className == "dropzone" ) {
+                          event.target.style.background = "";
+                          // dragged.parentNode.removeChild( dragged );
+                          event.target.appendChild( dragged );
+                      }
+
+                  }, false);
+
+                  // end drag and drop funciton
+
             } //success block close
 
         });
