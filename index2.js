@@ -27,20 +27,40 @@ $(document).ready(function() {
 
     // create array of arrays to save to local storage on save palettes click event
     $('#save-palettes').click(function() {
-        let savedPalettes = [];
-        $('#palette-dropzone').children().each(function() {
-            let palette = []
-            $(this).children().each(function() {
-                let rgbColor = this.style.backgroundColor
-                palette.push(rgbColor)
+
+        if (JSON.parse(localStorage.getItem("palettes")) === null) {
+            let savedPalettes = [];
+            $('#palette-dropzone').children().each(function() {
+                let palette = []
+                $(this).children().each(function() {
+                    let rgbColor = this.style.backgroundColor
+                    palette.push(rgbColor)
+                })
+                savedPalettes.push(palette)
             })
-            savedPalettes.push(palette)
-        })
-        console.log('savedPalettes for storage:', savedPalettes);
-        console.log("type of savedPalettes:", typeof savedPalettes);
-        localStorage.setItem("palettes", JSON.stringify(savedPalettes))
-        let storagePal = JSON.parse(localStorage.getItem("palettes"))
-        console.log('Palettes out of storage', storagePal);
+            console.log('savedPalettes for storage:', savedPalettes);
+            console.log("type of savedPalettes:", typeof savedPalettes);
+            localStorage.setItem("palettes", JSON.stringify(savedPalettes))
+            let storagePal = JSON.parse(localStorage.getItem("palettes"))
+            console.log('Palettes out of storage', storagePal);
+            $('#palette-dropzone').empty()
+        } else {
+            let oldStorage = JSON.parse(localStorage.getItem("palettes"))
+            $('#palette-dropzone').children().each(function() {
+                let palette = []
+                $(this).children().each(function() {
+                    let rgbColor = this.style.backgroundColor
+                    palette.push(rgbColor)
+                })
+                oldStorage.push(palette)
+            })
+            console.log('appended oldStorage ready to store:', oldStorage);
+            console.log("type of appended oldStorage:", typeof oldStorage);
+            localStorage.setItem("palettes", JSON.stringify(oldStorage))
+            let storagePal = JSON.parse(localStorage.getItem("palettes"))
+            console.log('Palettes out of storage again', storagePal);
+            $('#palette-dropzone').empty()
+        }
     })
 
 
@@ -61,9 +81,11 @@ $(document).ready(function() {
             jsonp: 'jsonCallback',
             success: function(data) {
                 console.log("first object in data set", data[0]);
+                $('#paletteCont').empty()
                 // create container for API data to populate with palettes
-                var divContainer = $('<div>').addClass('palette-container')
-                divContainer.appendTo('#color-selector-box')
+                var divContainer = $('#paletteCont')
+                divContainer.addClass('palette-container')
+
                 // Create and append container for each palette
                 for (var i = 0; i < data.length; i++) {
                     createPalContainer(data[i], i, divContainer)
@@ -94,8 +116,8 @@ $(document).ready(function() {
                 document.addEventListener("dragenter", function(event) {
                     // highlight potential drop target when the draggable element enters it
                     if (event.target.className == "dropzone") {
-                        $(this).addClass('z-depth-5')
-                        // event.target.style.background = "purple";
+
+                        event.target.style.background = "#666666";
                     }
 
                 }, false);
@@ -103,8 +125,8 @@ $(document).ready(function() {
                 document.addEventListener("dragleave", function(event) {
                     // reset background of potential drop target when the draggable element leaves it
                     if (event.target.className == "dropzone") {
-                        $(this).removeClass('z-depth-5')
-                        // event.target.style.background = "";
+
+                        event.target.style.background = "#444444";
                     }
 
                 }, false);
