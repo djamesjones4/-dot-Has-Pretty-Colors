@@ -8,10 +8,13 @@ $(document).ready(function(){
       // paletteDiv.attr('ondragstart', "event.dataTransfer.setData('text/plain',null)")
       paletteDiv.appendTo(divContainer)
       if (data !== undefined) {
-          for (i = 0; i < data.length; i++) {
+
+          for (let i = 0; i < data.length; i++) {
 
               let colorDiv = $('<div>').addClass('color-div' [i]).appendTo(paletteDiv)
               let rgbValue = data[i]
+              console.log("Creating color", rgbValue , "for palette", palCount);
+
               console.log(rgbValue);
               // give each colorDiv a unique classname (index[c,o,l,o,r] + palette title + hexValue)
               // colorDiv.addClass(`${data.title} ` + `${hexValue}`)
@@ -29,8 +32,8 @@ console.log(savedPalettes);
 
 let divContainer = $('#paletteCont')
 //iterate through saved palettes
-for(i=0; i<savedPalettes.length; i++){
-
+for(let i=0; i<savedPalettes.length; i++){
+  console.log("Creating palette", i);
   createPalContainer(savedPalettes[i], i, divContainer)
 
 }
