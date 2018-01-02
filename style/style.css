@@ -33,7 +33,7 @@
   background-clip: text;
 }
 .sidebar {
-  
+
 }
 .sidebar-nav-fixed {
   width: 100%;
@@ -72,3 +72,7 @@
   border-radius: 15%;
   align-self: center;
 }
+
+/* #sidebar {
+  margin-top: 1.5em;
+} */
