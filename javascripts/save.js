@@ -37,15 +37,21 @@ $(document).ready(function() {
         paletteDiv.clone().attr('class', 'nav-color').appendTo($('.navColor'))
         paletteDiv.clone().attr('class', 'color-text').appendTo($('.textColor'))
 
-    } // end create palette fu
+    } // end create palette function
+
+    // get saved palettes from local storage
     let savedPalettes = JSON.parse(localStorage.getItem('palettes'))
-    console.log(savedPalettes);
+    console.log('savedPalettes', savedPalettes);
 
     let divContainer = $('#paletteCont')
-    //iterate through saved palettes
+    // iterate through saved palettes
     for (let i = 0; i < savedPalettes.length; i++) {
         console.log("Creating palette", i);
+
+        // create DOM container for palette
         createPalContainer(savedPalettes[i], i, divContainer)
+
+        // create on click event listener for each item in each palette
         $('.back-color').click(function() {
             console.log('you clicked');
 
@@ -56,8 +62,12 @@ $(document).ready(function() {
             }
             console.log("target color:", colorToUse);
             console.log($('nav')[0]);
+
+            // change background color to clicked color
             $('body').css('background-color', `${colorToUse}`)
         })
+
+        // set on-click event listener for nav color
         $('.nav-color').click(function() {
             console.log('you clicked');
 
@@ -68,9 +78,10 @@ $(document).ready(function() {
             }
             console.log("target color:", colorToUse);
             console.log($('nav')[0]);
+            // change nav color to clicked color
             $('nav').css('background-color', `${colorToUse}`)
         })
-
+        // set event listener for text color palettes
         $('.color-text').click(function() {
             console.log('you clicked');
 
@@ -81,20 +92,12 @@ $(document).ready(function() {
             }
             console.log("target color:", colorToUse);
             console.log($('nav')[0]);
+
+            // change text color to selected color
             $('.text-color').css('color', `${colorToUse}`)
 
         })
 
     }
-
-
-
-    
-
-
-
-
-
-
 
 })
