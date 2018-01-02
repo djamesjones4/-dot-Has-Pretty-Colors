@@ -75,7 +75,7 @@ $(document).ready(function() {
             dataType: 'jsonp',
             data: {
                 format: 'json',
-                numResults: 20,
+                numResults: 50,
                 hex: userSearch,
             },
             jsonp: 'jsonCallback',
@@ -160,4 +160,4 @@ $(document).ready(function() {
 
 
     // document ready close
-});
+})
