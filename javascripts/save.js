@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     var createPalContainer = function createPaletteDiv(data, palCount, divContainer) {
         let paletteDiv = $('<div>').addClass("palette-div").attr('id', `pal${palCount}`)
 
@@ -15,9 +16,9 @@ $(document).ready(function() {
                 let colorDiv = $('<div>').addClass('color-div' [i])
                 let rgbValue = data[i]
                 // let rgbaValue = data[i].slice(0,3) + "a" + data[i].slice(3, (data[i].length -1)) + ", 1" + ")"
-                console.log("Creating color", rgbValue, "for palette", palCount);
+                // console.log("Creating color", rgbValue, "for palette", palCount);
 
-                console.log(rgbValue);
+                // console.log(rgbValue);
                 // give each colorDiv a unique classname (index[c,o,l,o,r] + palette title + hexValue)
                 // colorDiv.addClass(`${data.title} ` + `${hexValue}`)
                 // add background color of hexValue to colorDiv
@@ -26,8 +27,8 @@ $(document).ready(function() {
                 colorDiv.css('height', '50px');
                 colorDiv.css('display', 'inline-block')
                 colorDiv.appendTo(paletteDiv)
-                console.log(paletteDiv);
-                console.log(rgbValue, colorDiv.css('background-color'));
+                // console.log(paletteDiv);
+                // console.log(rgbValue, colorDiv.css('background-color'));
             }
 
         }
@@ -46,22 +47,22 @@ $(document).ready(function() {
     let divContainer = $('#paletteCont')
     // iterate through saved palettes
     for (let i = 0; i < savedPalettes.length; i++) {
-        console.log("Creating palette", i);
+        // console.log("Creating palette", i);
 
         // create DOM container for palette
         createPalContainer(savedPalettes[i], i, divContainer)
 
         // create on click event listener for each item in each palette
         $('.back-color').click(function() {
-            console.log('you clicked');
+            // console.log('you clicked');
 
             if ($(event.target.id) !== "noClick1" && $(event.target.id) !== 'pal0') {
-                console.log('you clicked');
-                console.log(event.target);
+                // console.log('you clicked');
+                // console.log(event.target);
                 var colorToUse = $(event.target).css('background-color')
             }
-            console.log("target color:", colorToUse);
-            console.log($('nav')[0]);
+            // console.log("target color:", colorToUse);
+            // console.log($('nav')[0]);
 
             // change background color to clicked color
             $('body').css('background-color', `${colorToUse}`)
@@ -72,26 +73,26 @@ $(document).ready(function() {
             console.log('you clicked');
 
             if ($(event.target.id) !== "noClick" && $(event.target.id) !== 'pal1') {
-                console.log('you clicked');
-                console.log(event.target);
+                // console.log('you clicked');
+                // console.log(event.target);
                 var colorToUse = $(event.target).css('background-color')
             }
-            console.log("target color:", colorToUse);
-            console.log($('nav')[0]);
+            // console.log("target color:", colorToUse);
+            // console.log($('nav')[0]);
             // change nav color to clicked color
             $('nav').css('background-color', `${colorToUse}`)
         })
         // set event listener for text color palettes
         $('.color-text').click(function() {
-            console.log('you clicked');
+            // console.log('you clicked');
 
             if ($(event.target.id) !== "noClick" && $(event.target.id) !== 'pal2') {
-                console.log('you clicked');
-                console.log(event.target);
+                // console.log('you clicked');
+                // console.log(event.target);
                 var colorToUse = $(event.target).css('background-color')
             }
-            console.log("target color:", colorToUse);
-            console.log($('nav')[0]);
+            // console.log("target color:", colorToUse);
+            // console.log($('nav')[0]);
 
             // change text color to selected color
             $('.text-color').css('color', `${colorToUse}`)
@@ -99,5 +100,4 @@ $(document).ready(function() {
         })
 
     }
-
 })
